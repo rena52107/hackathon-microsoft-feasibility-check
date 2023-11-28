@@ -29,9 +29,9 @@ const SpeechToTextComponent = () => {
     recognizer.current.recognized = (s, e) => {
       const result = e.result;
       if (result.reason === sdk.ResultReason.RecognizedSpeech) {
-        setRecognizedTranscript(
-          (prevTranscript) => prevTranscript + result.text + '\n'
-        );
+        const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const newText = `[${timestamp}] ${result.text}\n`;
+        setRecognizedTranscript((prevTranscript) => prevTranscript + newText);
       }
     };
 
